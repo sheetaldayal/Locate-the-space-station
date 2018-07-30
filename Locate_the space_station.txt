@@ -1,0 +1,61 @@
+import json
+from urllib.request import urlopen, Request
+import turtle
+import time
+
+
+url = 'http://api.open-notify.org/astros.json'
+request = Request(url)
+response = urlopen(request)
+print(type(response))
+result = json.loads(response.read())
+print(result, '\n')
+print('People in Space:', result['number'],'\n')
+
+people = result['people']
+for p in people:
+    print(p['name'], '\n')
+    
+url = 'http://api.open-notify.org/iss-now.json'
+request= Request(url)
+response =urlopen(request)
+result = json.loads(response.read())
+print(result,'\n')
+location = result['iss_position']
+lat = location['latitude']
+long = location['longitude']
+print('Latitude:', lat)
+print('Longitude:', long)
+print('\n')
+
+screen = turtle.Screen()
+screen.setup(720,360)
+screen.setworldcoordinates(-180, -90, 180, 90)
+screen.bgpic(r'C:\Users\map.gif')
+screen.register_shape(r'C:\Users\ss.gif')
+ss = turtle.Turtle()
+ss.setheading(90)
+
+ss.penup()
+ss.goto(float(long), float(lat))
+ss.pendown()
+
+#New Delhi
+lat = 28.7041   
+long = 77.1025
+
+location = turtle.Turtle()
+location.penup()
+location.color('yellow')
+location.goto(long,lat)
+location.dot(5)
+location.hideturtle()
+
+url = 'http://api.open-notify.org/iss-pass.json?lat=28.7041&lon=77.1025'
+request=Request(url)
+response = urlopen(request)
+result = json.loads(response.read())
+over = result['response'][1]['risetime']
+print(over)
+style = ('Calibri', 7, 'bold')
+location.write(time.ctime(over), font=style)
