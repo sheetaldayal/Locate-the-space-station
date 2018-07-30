@@ -39,23 +39,3 @@ ss.setheading(90)
 ss.penup()
 ss.goto(float(long), float(lat))
 ss.pendown()
-
-#New Delhi
-lat = 28.7041   
-long = 77.1025
-
-location = turtle.Turtle()
-location.penup()
-location.color('yellow')
-location.goto(long,lat)
-location.dot(5)
-location.hideturtle()
-
-url = 'http://api.open-notify.org/iss-pass.json?lat=28.7041&lon=77.1025'
-request=Request(url)
-response = urlopen(request)
-result = json.loads(response.read())
-over = result['response'][1]['risetime']
-print(over)
-style = ('Calibri', 7, 'bold')
-location.write(time.ctime(over), font=style)
