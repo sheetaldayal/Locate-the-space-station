@@ -1,0 +1,6 @@
+You can use a website to look up the latitude and longitude of locations you are interested in.
+
+
+http://www.latlong.net/ 
+
+https://mynasadata.larc.nasa.gov/latitudelongitude-finder/
